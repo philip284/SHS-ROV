@@ -20,7 +20,7 @@ umask 022
     . ./rov.default
 #fi
 
-#. /lib/lsb/init-functions
+. /lib/lsb/init-functions
 
 # Are we running from init?
 run_by_init() {
