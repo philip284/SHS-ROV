@@ -1,0 +1,5 @@
+# Define which camera's are active.
+CAM1=OFF
+CAM2=OFF
+CAM3=OFF
+CAM4=OFF
