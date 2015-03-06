@@ -29,30 +29,30 @@ run_by_init() {
 
 rov_start() {
    echo "Starting RTIMULibDrive for IMU support."
-   RTIMULibDrive & 
+   RTIMULibDrive > RTIMULib.log 2>&1 &
+   
    echo "Starting Camera support."
-   cd ./mjpg-streamer/mjpg-streamer-experimental
    if [ $CAM1 == "ON" ] 
    then
      echo "Starting Cam1."
-     ./mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video0" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video0" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
    fi
    if [ $CAM2 == "ON" ] 
    then
      echo "Starting Cam2."
-     ./mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video1" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video1" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
    fi
    if [ $CAM3 == "ON" ] 
    then
      echo "Starting Cam3."
-     ./mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video2" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video2" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
    fi
    if [ $CAM4 == "ON" ] 
    then
      echo "Starting Cam4."
-     ./mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video3" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video3" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
    fi
-   cd ../..
+   
    echo "Starting ROV server."
    node app.js > server.log 2>&1 &
 }
