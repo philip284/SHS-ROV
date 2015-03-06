@@ -1,0 +1,20 @@
+{
+  "author": "Philip McCleer",
+  "name": "sensors",
+  "description": "Read the sensors and output to the client so we can drive the rov",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "dependencies": {
+    "express": "^4.12.0",
+    "i2c": "^0.1.8",
+    "mpu9150": "0.0.1",
+    "ms5803_rpi": "^0.1.0"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
