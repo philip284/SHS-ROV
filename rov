@@ -28,7 +28,6 @@ run_by_init() {
 }
 
 rov_start() {
-   echo "Starting SHS-ROV."
    echo "Starting RTIMULibDrive for IMU support."
    RTIMULibDrive > RTIMULib.log 2>&1 &
    
@@ -71,21 +70,21 @@ export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
 
 case "$1" in
   start)
-	log_daemon_msg "Starting Moki ROV server" "rov" || true
+	log_daemon_msg "Starting SHS-ROV server" "rov" || true
     	echo;
 	rov_start;
 	;;
   stop)
-	log_daemon_msg "Stopping Moki ROV server" "rov" || true
+	log_daemon_msg "Stopping SHS-ROV server" "rov" || true
     	echo;
 	rov_stop;
 	;;
 
   restart)
-	log_daemon_msg "Stopping Moki ROV server" "rov" || true
+	log_daemon_msg "Stopping SHS-ROV server" "rov" || true
     	echo;
 	rov_stop;
-	log_daemon_msg "Starting Moki ROV server" "rov" || true
+	log_daemon_msg "Starting SHS-ROV server" "rov" || true
     	echo;
 	rov_start;
 	;;
