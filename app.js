@@ -15,8 +15,8 @@ var MS5803 = require('ms5803_rpi');
 
 var sensor = new MS5803({address: 0x76, device: '/dev/i2c-1'});
 
-var temp;
-var mbar;
+//var temp;
+//var mbar;
 
 var imudata = {
   time: 0,
@@ -91,7 +91,7 @@ updateDepth = function() {
 
 updateDepth();
 
-app.get('/', function(req, res) {
+app.get('/help', function(req, res) {
   res.send('/compass - gets compass information<br>/depth - gets depth information');
 });
 
@@ -103,7 +103,7 @@ app.get('/depth', function(req, res) {
   res.send(''+ rovdata.temp + ',' + rovdata.mbar + '');
 });
 
-var server = app.listen(80, function() {
+var server = app.listen(8035, function() {
   var host = server.address().address;
   var port = server.address().port;
   

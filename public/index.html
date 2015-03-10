@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="compassRoss.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <img src="">
+    <div id="compassTest">
+    </div>
+    <div id="depth">
+    </div>
+    <div id="compass">
+    </div>
+    <div id="compassrose">
+    </div>
+    
+    <script src="jquery.min.js"></script>
+    <script type="text/javascript" src="jQueryRotate.2.2.js"></script>        
+    <script type="text/javascript"src="CompassRoss.js"></script>
+    <script>
+      // http://192.168.254.1:8090/?action=stream
+      var rAF = window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.requestAnimationFrame;
+      
+      $(document).ready(function() {            
+        $('#compassrose').CompassRose({pos: 0});
+      });
+      
+      function httpGet(theUrl)
+      {
+        var xmlHttp = null;
+
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", theUrl, false );
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+      }
+      
+      var compass;
+      var depth;
+      
+      function updateStatus() {
+        compass = httpGet('http://10.1.0.219:8035/compass').split(',');
+        depth = httpGet('http://10.1.0.219:8035/depth').split(',');
+        
+        $('#compassTest').html('Heading, pitch, roll: ' + compass.join(','));
+        $('#compass').html('Heading: ' + compass[0]);
+        
+        $('.imgB1').rotate(parseFloat(compass[0]));
+        
+        $('#depth').html('Temp, Mbar: '  + depth.join(','));
+        
+        setTimeout(function(){rAF(updateStatus);},50);
+      }
+      
+      setTimeout(function(){rAF(updateStatus);},50);
+    </script>
+  </body>
+</html>

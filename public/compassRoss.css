@@ -1,0 +1,20 @@
+/* 
+    Document   : compassRoss.css
+    Created on : Feb 27, 2013, 2:40:33 PM
+    Author     : jeff
+    Description:
+        Images on Compass
+*/
+
+.imgA1 {
+    position:absolute;
+    z-index:1;
+}
+.imgB1 {
+    position:relative;    
+    z-index:2;
+}
+
+.inputCompass{
+    visibility:hidden !important;
+}
