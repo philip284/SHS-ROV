@@ -35,12 +35,12 @@ rov_start() {
    if [ $CAM1 == "ON" ] 
    then
      echo "Starting Cam1."
-     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video0" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     ../mjpg-streamer/mjpg_streamer -i "../mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video0" -o "../mjpg-streamer/output_http.so  -n -w ../mjpg-streamer/www -p 8080" &
    fi
    if [ $CAM2 == "ON" ] 
    then
      echo "Starting Cam2."
-     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video1" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     ../mjpg-streamer/mjpg_streamer -i "../mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video1" -o "../mjpg-streamer/output_http.so  -n -w ../mjpg-streamer/www -p 8081" &
    fi
    if [ $CAM3 == "ON" ] 
    then
