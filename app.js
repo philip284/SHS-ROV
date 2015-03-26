@@ -106,7 +106,7 @@ app.get('/depth', function(req, res) {
 
 app.get('/', function(req, res) {
     res.render('pages/index', {
-        IpAddr: ip.address()
+        IpAddr: req.getLocalAddr())
     });
 });
 
