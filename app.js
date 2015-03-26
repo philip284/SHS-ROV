@@ -1,6 +1,7 @@
 var express = require('express');
 var cors = require('cors');
 var app = express();
+var ip = require('ip');
 
 app.use(cors());
 
@@ -105,7 +106,7 @@ app.get('/depth', function(req, res) {
 
 app.get('/', function(req, res) {
     res.render('pages/index', {
-        IpAddr: 
+        IpAddr: ip.address()
     });
 });
 
@@ -116,4 +117,5 @@ var server = app.listen(8035, function() {
   console.log('App listening at http://%s:%s', host, port);
 });
 
+console.log(ip.address());
 
