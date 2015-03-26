@@ -69,6 +69,8 @@
       }
       
       function cam() {
+        ipAddr = location.host.split(':')[0];
+        
         $('#Cam1').attr('src', "http://" + ipAddr + ":8080/?action=stream");
         $('#Cam2').attr('src', "http://" + ipAddr + ":8081/?action=stream");
       }
