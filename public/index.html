@@ -21,7 +21,7 @@
     <script type="text/javascript" src="jQueryRotate.2.2.js"></script>        
     <script type="text/javascript"src="CompassRoss.js"></script>
     <script>
-      var ipAddr = "10.0.0.2";
+      var ipAddrServer = location.host;
     
       // http://192.168.254.1:8090/?action=stream
       var rAF = window.mozRequestAnimationFrame ||
@@ -46,8 +46,8 @@
       var depth;
       
       function updateStatus() {
-        compass = httpGet('http://' + ipAddr + ':8035/compass').split(',');
-        depth = httpGet('http://' + ipAddr + ':8035/depth').split(',');
+        compass = httpGet('http://' + ipAddrServer + ':8035/compass').split(',');
+        depth = httpGet('http://' + ipAddrServer + ':8035/depth').split(',');
         
         $('#compassTest').html('Heading, pitch, roll: ' + compass.join(','));
         $('#compass').html('Heading: ' + compass[0]);
@@ -69,8 +69,14 @@
       }
       
       function cam() {
-        $('#Cam1').attr('src', "http://" + ipAddr + ":8080/?action=stream");
-        $('#Cam2').attr('src', "http://" + ipAddr + ":8081/?action=stream");
+        setTimeout(function() {
+          rAF(cam);
+        },30000);
+        
+        ipAddrServer = location.host;
+        
+        $('#Cam1').attr('src', "http://" + ipAddrServer + ":8080/?action=stream");
+        $('#Cam2').attr('src', "http://" + ipAddrServer + ":8081/?action=stream");
       }
       
       setTimeout(function() {
@@ -83,7 +89,7 @@
       
       function compassUpdate() {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://" + ipAddr + ":8035/compass", true);
+        xhr.open("GET", "http://" + ipAddrServer + ":8035/compass", true);
         xhr.onload = function (e) {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {

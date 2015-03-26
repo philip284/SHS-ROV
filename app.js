@@ -108,10 +108,9 @@ app.get('/depth', function(req, res) {
   res.send(''+ rovdata.temp + ',' + rovdata.mbar + '');
 });
 
-app.get('/', function(req, res) {
-    res.render('pages/index', {
-    });
-});
+//app.get('/', function(req, res) {
+//    res.render('pages/index');
+//});
 
 var server = app.listen(8035, function() {
   var host = server.address().address;
