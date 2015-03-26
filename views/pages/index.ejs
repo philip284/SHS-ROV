@@ -21,7 +21,7 @@
     <script type="text/javascript" src="jQueryRotate.2.2.js"></script>        
     <script type="text/javascript"src="CompassRoss.js"></script>
     <script>
-      var ipAddr = "<%= IpAddr %>";
+      var ipAddr = location.host.split(':')[0];
     
       // http://192.168.254.1:8090/?action=stream
       var rAF = window.mozRequestAnimationFrame ||
