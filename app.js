@@ -93,6 +93,8 @@ updateDepth = function() {
 
 updateDepth();
 
+app.set('view engine', 'ejs');
+
 app.get('/help', function(req, res) {
   res.send('/compass - gets compass information<br>/depth - gets depth information');
 });
@@ -117,6 +119,4 @@ var server = app.listen(8035, function() {
   
   console.log('App listening at http://%s:%s', host, port);
 });
-
-console.log(ip.address());
 
