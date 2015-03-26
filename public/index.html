@@ -21,7 +21,7 @@
     <script type="text/javascript" src="jQueryRotate.2.2.js"></script>        
     <script type="text/javascript"src="CompassRoss.js"></script>
     <script>
-      var ipAddrServer = location.host;
+      var ipAddrServer = location.host.split(':')[0];
     
       // http://192.168.254.1:8090/?action=stream
       var rAF = window.mozRequestAnimationFrame ||
@@ -73,7 +73,7 @@
           rAF(cam);
         },30000);
         
-        ipAddrServer = location.host;
+        ipAddrServer = location.host.split(':')[0];
         
         $('#Cam1').attr('src', "http://" + ipAddrServer + ":8080/?action=stream");
         $('#Cam2').attr('src', "http://" + ipAddrServer + ":8081/?action=stream");
