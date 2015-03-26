@@ -5,6 +5,7 @@ var ip = require('ip');
 var os = require('os');
 
 app.use(cors());
+app.use(express.static('public'))
 
 // Switched to RTIMULib
 //var mpu9150 = require('mpu9150');
