@@ -54,12 +54,12 @@ rov_start() {
    fi
    
    echo "Starting ROV server."
-   node app.js > server.log 2>&1 &
+   forever start app.js -l server.log
 }
 
 rov_stop() {
    echo "Stopping ROV server."
-   killall -9 -q node;
+   forever stop app.js
    echo "Stopping mjpg_streamer."
    killall -9 -q mjpg_streamer;
    echo "Stopping RTIMULibDrive."
