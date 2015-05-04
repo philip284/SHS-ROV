@@ -6,6 +6,7 @@
   <body>
     <img src="http://10.0.0.3:8080/?action=stream" id="Cam1" />
     <img src="http://10.0.0.3:8081/?action=stream" id="Cam2" />
+    <img src="http://10.0.0.3:8082/?action=stream" id="Cam3" />
     <div id="compassTest">
     </div>
     <div id="depthTest">
@@ -77,6 +78,7 @@
         
         $('#Cam1').attr('src', "http://" + ipAddrServer + ":8080/?action=stream");
         $('#Cam2').attr('src', "http://" + ipAddrServer + ":8081/?action=stream");
+        $('#Cam3').attr('src', "http://" + ipAddrServer + ":8082/?action=stream");
       }
       
       setTimeout(function() {

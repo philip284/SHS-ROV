@@ -5,7 +5,7 @@ var ip = require('ip');
 var os = require('os');
 
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static('/home/pi/SHS-ROV/public'));
 
 // Switched to RTIMULib
 //var mpu9150 = require('mpu9150');

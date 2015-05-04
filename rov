@@ -17,8 +17,11 @@ umask 022
 
 #if test -f /etc/default/rov; then
 #    . /etc/default/rov
-    . ./rov.default
+    . /home/pi/SHS-ROV/rov.default
 #fi
+
+export PATH=$PATH:/usr/local/bin
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
 . /lib/lsb/init-functions
 
@@ -27,39 +30,43 @@ run_by_init() {
     ([ "$previous" ] && [ "$runlevel" ]) || [ "$runlevel" = S ]
 }
 
+cd /home/pi/SHS-ROV
+
 rov_start() {
    echo "Starting RTIMULibDrive for IMU support."
-   RTIMULibDrive > RTIMULib.log 2>&1 &
+   RTIMULibDrive > /home/pi/SHS-ROV/RTIMULib.log 2>&1 &
    
    echo "Starting Camera support."
    if [ $CAM1 == "ON" ] 
    then
      echo "Starting Cam1."
-     ../mjpg-streamer/mjpg_streamer -i "../mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video0" -o "../mjpg-streamer/output_http.so  -n -w ../mjpg-streamer/www -p 8080" &
+     exec /home/pi/mjpg-streamer/mjpg_streamer -i "/home/pi/mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video0" -o "/home/pi/mjpg-streamer/output_http.so  -n -w /home/pi/mjpg-streamer/www -p 8080" &
    fi
    if [ $CAM2 == "ON" ] 
    then
      echo "Starting Cam2."
-     ../mjpg-streamer/mjpg_streamer -i "../mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video1" -o "../mjpg-streamer/output_http.so  -n -w ../mjpg-streamer/www -p 8081" &
+     exec /home/pi/mjpg-streamer/mjpg_streamer -i "/home/pi/mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video1" -o "/home/pi/mjpg-streamer/output_http.so  -n -w /home/pi/mjpg-streamer/www -p 8081" &
    fi
    if [ $CAM3 == "ON" ] 
    then
      echo "Starting Cam3."
-     mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video2" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
+     exec /home/pi/mjpg-streamer/mjpg_streamer -i "/home/pi/mjpg-streamer/input_uvc.so -n -f 5 -r 800x600 -d /dev/video2" -o "/home/pi/mjpg-streamer/output_http.so  -n -w /home/pi/mjpg-streamer/www -p 8082" &
    fi
    if [ $CAM4 == "ON" ] 
    then
      echo "Starting Cam4."
      mjpg_streamer -i "./input_uvc.so -n -f 24 -r 800x600 -d /dev/video3" -o "./output_http.so  -n -w /usr/local/www -p 8080" &
    fi
-   
+
    echo "Starting ROV server."
-   forever start app.js -l server.log
+   #forever --sourceDir=/home/pi/SHS-ROV -l /home/pi/SHS-ROV/server.log start app.js
+   forever app.js &
+   echo "Done Starting"
 }
 
 rov_stop() {
    echo "Stopping ROV server."
-   forever stop app.js
+   forever stop /home/pi/SHS-ROV/app.js
    echo "Stopping mjpg_streamer."
    killall -9 -q mjpg_streamer;
    echo "Stopping RTIMULibDrive."
