@@ -10,13 +10,14 @@ app.use(express.static('/home/pi/SHS-ROV/public'));
 // Switched to RTIMULib
 //var mpu9150 = require('mpu9150');
 
-var MS5803 = require('ms5803_rpi');
+// Removed depth
+//var MS5803 = require('ms5803_rpi');
 
 // Instantiate and initialize. 
 //var mpu = new mpu9150();
 //mpu.initialize();
 
-var sensor = new MS5803({address: 0x76, device: '/dev/i2c-1'});
+//var sensor = new MS5803({address: 0x76, device: '/dev/i2c-1'});
 
 //var temp;
 //var mbar;
@@ -84,6 +85,10 @@ imuserver.on('message', function (message, remote) {
 
 imuserver.bind(PORT, HOST);
 
+var makePwm = require("adafruit-pca9685" );
+var pwm = makePwm({"address": config.sensor.PCA9685.addr, "device": config.i2c.device, "freq": 50, "debug": false});
+
+/**
 updateDepth = function() {
   sensor.read(function (err, data) {
     rovdata.temp = data.temperature;
@@ -93,6 +98,7 @@ updateDepth = function() {
 };
 
 updateDepth();
+**/
 
 app.set('view engine', 'ejs');
 
@@ -104,9 +110,11 @@ app.get('/compass', function(req, res) {
   res.send('' + rovdata.heading + ',' + rovdata.pitch + ',' + rovdata.roll);
 });
 
+/**
 app.get('/depth', function(req, res) {
   res.send(''+ rovdata.temp + ',' + rovdata.mbar + '');
 });
+**/
 
 //app.get('/', function(req, res) {
 //    res.render('pages/index');
