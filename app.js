@@ -86,7 +86,7 @@ imuserver.on('message', function (message, remote) {
 imuserver.bind(PORT, HOST);
 
 var makePwm = require("adafruit-pca9685" );
-var pwm = makePwm({"address": config.sensor.PCA9685.addr, "device": config.i2c.device, "freq": 50, "debug": false});
+var pwm = makePwm({"address": 0x40, "device": '/dev/i2c-1', "freq": 50, "debug": false});
 
 /**
 updateDepth = function() {
