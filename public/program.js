@@ -22,10 +22,6 @@ function RaspPi() {
   
   this.socket = io();
   
-  this.CH1.prototype.pulsewidth_us = function(value) {
-    socket.emit('CH1pwus', value);
-  };
-  
   this.CH2.prototype.pulsewidth_us = function(value) {
     socket.emit('CH2pwus', value);
   };
@@ -38,6 +34,10 @@ function RaspPi() {
     socket.emit('CH4pwus', value);
   };
 }
+
+RaspPi.CH1.prototype.pulsewidth_us = function(value) {
+  this.socket.emit('CH1pwus', value);
+};
 
 RaspPi.prototype.getHigh = function() {
   return float2int(this.escMiddle + (this.escHigh - this.escMiddle) / 5 * this.throttlePower);
