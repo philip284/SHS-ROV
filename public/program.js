@@ -3,11 +3,13 @@ function float2int(value) {
 }
 
 function RaspPi() {
+  this.socket = io();
+  
   //Motor definition
-  this.CH1 = function() {};
-  this.CH2 = function() {};
-  this.CH3 = function() {};
-  this.CH4 = function() {};
+  this.CH1 = function() {this.socket.emit('CH1pwus', value);};
+  this.CH2 = function() {this.socket.emit('CH2pwus', value);};
+  this.CH3 = function() {this.socket.emit('CH3pwus', value);};
+  this.CH4 = function() {this.socket.emit('CH4pwus', value);};
   
   //Throttle Power
   this.throttlePower = 5;
@@ -19,25 +21,7 @@ function RaspPi() {
   
   //Deadzone
   this.controllerDeadzone = .2;
-  
-  this.socket = io();
-  
-  this.CH2.prototype.pulsewidth_us = function(value) {
-    socket.emit('CH2pwus', value);
-  };
-  
-  this.CH3.prototype.pulsewidth_us = function(value) {
-    socket.emit('CH3pwus', value);
-  };
-  
-  this.CH4.prototype.pulsewidth_us = function(value) {
-    socket.emit('CH4pwus', value);
-  };
 }
-
-RaspPi.CH1.prototype.pulsewidth_us = function(value) {
-  this.socket.emit('CH1pwus', value);
-};
 
 RaspPi.prototype.getHigh = function() {
   return float2int(this.escMiddle + (this.escHigh - this.escMiddle) / 5 * this.throttlePower);
@@ -59,16 +43,16 @@ RaspPi.prototype.setCH4 = function(value, controller) {
   $("#mot1").html(value);
   if(controller == undefined)
   {
-    this.CH4.pulsewidth_us(value);
+    this.CH4(value);
     this.keyCH4 = true;
     return;
   } else if(controller == 0)
   {
     this.keyCH4 = false;
-    this.CH4.pulsewidth_us(value);
+    this.CH4(value);
   }else if(!this.keyCH4)
   {
-    this.CH4.pulsewidth_us(value);
+    this.CH4(value);
   }
 }
 
@@ -77,16 +61,16 @@ RaspPi.prototype.setCH1 = function(value, controller) {
   $("#mot2").html(value);
   if(controller == undefined)
   {
-    this.CH1.pulsewidth_us(value);
+    this.CH1(value);
     this.keyCH1 = true;
     return;
   } else if(controller == 0)
   {
     this.keyCH1 = false;
-    this.CH1.pulsewidth_us(value);
+    this.CH1(value);
   }else if(!this.keyCH1)
   {
-    this.CH1.pulsewidth_us(value);
+    this.CH1(value);
   }
 }
 
@@ -95,16 +79,16 @@ RaspPi.prototype.setCH3 = function(value, controller) {
   $("#mot3").html(value);
   if(controller == undefined)
   {
-    this.CH3.pulsewidth_us(value);
+    this.CH3(value);
     this.keyCH3 = true;
     return;
   } else if(controller == 0)
   {
     this.keyCH3 = false;
-    this.CH3.pulsewidth_us(value);
+    this.CH3(value);
   }else if(!this.keyCH3)
   {
-    this.CH3.pulsewidth_us(value);
+    this.CH3(value);
   }
 }
 
@@ -113,16 +97,16 @@ RaspPi.prototype.setCH2 = function(value, controller) {
   $("#mot4").html(value);
   if(controller == undefined)
   {
-    this.CH2.pulsewidth_us(value);
+    this.CH2(value);
     this.keyCH2 = true;
     return;
   } else if(controller == 0)
   {
     this.keyCH2 = false;
-    this.CH2.pulsewidth_us(value);
+    this.CH2(value);
   }else if(!this.keyCH2)
   {
-    this.CH2.pulsewidth_us(value);
+    this.CH2(value);
   }
 }
 
