@@ -6,10 +6,10 @@ function RaspPi() {
   this.socket = io();
   
   //Motor definition
-  this.CH1 = function() {this.socket.emit('CH1pwus', value);};
-  this.CH2 = function() {this.socket.emit('CH2pwus', value);};
-  this.CH3 = function() {this.socket.emit('CH3pwus', value);};
-  this.CH4 = function() {this.socket.emit('CH4pwus', value);};
+  this.CH1 = function(value) {this.socket.emit('CH1pwus', value);};
+  this.CH2 = function(value) {this.socket.emit('CH2pwus', value);};
+  this.CH3 = function(value) {this.socket.emit('CH3pwus', value);};
+  this.CH4 = function(value) {this.socket.emit('CH4pwus', value);};
   
   //Throttle Power
   this.throttlePower = 5;
