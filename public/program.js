@@ -22,19 +22,19 @@ function RaspPi() {
   
   this.socket = io();
   
-  this.CH1.prototype.pulsewidth_us(value) = function() {
+  this.CH1.prototype.pulsewidth_us = function(value) {
     socket.emit('CH1pwus', value);
   };
   
-  this.CH2.prototype.pulsewidth_us(value) = function() {
+  this.CH2.prototype.pulsewidth_us = function(value) {
     socket.emit('CH2pwus', value);
   };
   
-  this.CH3.prototype.pulsewidth_us(value) = function() {
+  this.CH3.prototype.pulsewidth_us = function(value) {
     socket.emit('CH3pwus', value);
   };
   
-  this.CH4.prototype.pulsewidth_us(value) = function() {
+  this.CH4.prototype.pulsewidth_us = function(value) {
     socket.emit('CH4pwus', value);
   };
 }
