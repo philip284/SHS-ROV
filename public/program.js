@@ -4,10 +4,10 @@ function float2int(value) {
 
 function RaspPi() {
   //Motor definition
-  this.CH1;
-  this.CH2;
-  this.CH3;
-  this.CH4;
+  this.CH1 = function() {};
+  this.CH2 = function() {};
+  this.CH3 = function() {};
+  this.CH4 = function() {};
   
   //Throttle Power
   this.throttlePower = 5;
