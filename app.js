@@ -7,7 +7,7 @@ var os = require('os');
 app.use(cors());
 app.use(express.static('/home/pi/SHS-ROV/public'));
 
-var server = require('http').createServer();
+var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
 
