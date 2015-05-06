@@ -17,10 +17,17 @@
     </div>
     <div id="compassrose">
     </div>
-    
+    <div>
+      <h2 id="start">Press a button on your controller to start</h2>
+      <select id="controllers"></select><button id="useController">Use</button>
+    </div>
     <script src="jquery.min.js"></script>
     <script type="text/javascript" src="jQueryRotate.2.2.js"></script>        
     <script type="text/javascript"src="CompassRoss.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="mousetrap.min.js"></script>
+    <script src="object-watch.js"></script>
+    <script src="program.js"></script>
     <script>
       var ipAddrServer = location.host.split(':')[0];
     

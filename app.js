@@ -7,6 +7,10 @@ var os = require('os');
 app.use(cors());
 app.use(express.static('/home/pi/SHS-ROV/public'));
 
+var server = require('http').createServer();
+var io = require('socket.io')(server);
+
+
 // Switched to RTIMULib
 //var mpu9150 = require('mpu9150');
 
@@ -120,7 +124,32 @@ app.get('/depth', function(req, res) {
 //    res.render('pages/index');
 //});
 
-var server = app.listen(8035, function() {
+var servo = function(channel, pulse) {
+  pwm.setPulse(channel, pulse);
+};
+
+io.on('connection', function(socket){
+  console.log('connected');
+  
+  socket.on('CH1pwus', function(value) {
+    servo(1, value);
+  });
+  
+  socket.on('CH2pwus', function(value) {
+    servo(2, value);
+  });
+  
+  socket.on('CH3pwus', function(value) {
+    servo(3, value);
+  });
+  
+  socket.on('CH4pwus', function(value) {
+    servo(4, value);
+  });
+  
+});
+
+server.listen(8035, function() {
   var host = server.address().address;
   var port = server.address().port;
   
