@@ -134,22 +134,18 @@ io.on('connection', function(socket){
   
   socket.on('CH1pwus', function(value) {
     servo(1, value);
-    console.log('1:' + value);
   });
   
   socket.on('CH2pwus', function(value) {
     servo(2, value);
-    console.log('2:' + value);
   });
   
   socket.on('CH3pwus', function(value) {
     servo(3, value);
-    console.log('3:' + value);
   });
   
   socket.on('CH4pwus', function(value) {
     servo(4, value);
-    console.log('4:' + value);
   });
   
 });
