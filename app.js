@@ -124,6 +124,7 @@ app.get('/depth', function(req, res) {
 //    res.render('pages/index');
 //});
 
+/*
 var servo = function(channel, pulse) {
   pwm.setPulse(channel, pulse);
 };
@@ -147,7 +148,7 @@ io.on('connection', function(socket){
     servo(4, value);
   });
   
-});
+});*/
 
 server.listen(8035, function() {
   var host = server.address().address;
