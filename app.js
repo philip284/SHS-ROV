@@ -132,6 +132,10 @@ var servo = function(channel, pulse) {
 io.on('connection', function(socket){
   console.log('connected');
   
+  socket.on('CH0pwus', function(value) {
+    servo(0, value);
+  });
+  
   socket.on('CH1pwus', function(value) {
     servo(1, value);
   });

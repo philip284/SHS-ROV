@@ -5,19 +5,22 @@ function float2int(value) {
 function RaspPi() {
   this.socket = io();
   
+  this.toggledLaser = false;
+  
   //Motor definition
-  this.CH1 = function(value) {this.socket.emit('CH1pwus', value);};
-  this.CH2 = function(value) {this.socket.emit('CH2pwus', value);};
-  this.CH3 = function(value) {this.socket.emit('CH3pwus', value);};
-  this.CH4 = function(value) {this.socket.emit('CH4pwus', value);};
+  this.CH1 = function(value) {this.socket.emit('CH0pwus', value);};
+  this.CH2 = function(value) {this.socket.emit('CH1pwus', value);};
+  this.CH3 = function(value) {this.socket.emit('CH2pwus', value);};
+  this.CH4 = function(value) {this.socket.emit('CH3pwus', value);};
+  this.Laser = function(value) {this.socket.emit('CH4pwus', value);};
   
   //Throttle Power
   this.throttlePower = 5;
   
   //ESC calibration data
-  this.escHigh = 2000;
-  this.escMiddle = 1500;
-  this.escLow = 1000;
+  this.escHigh = 1910;
+  this.escMiddle = 1479;
+  this.escLow = 1048;
   
   //Deadzone
   this.controllerDeadzone = .2;
@@ -110,9 +113,33 @@ RaspPi.prototype.setCH2 = function(value, controller) {
   }
 }
 
+RaspPi.prototype.setLaser = function(value, controller) {
+  if(controller == undefined)
+  {
+    this.Laser(value);
+    this.keyLaser = true;
+    return;
+  } else if(controller == 0)
+  {
+    this.keyLaser = false;
+    this.Laser(value);
+  }else if(!this.keyLaser)
+  {
+    this.Laser(value);
+  }
+}
 
-
-
+RaspPi.prototype.toggleLaser() = function() {
+  this.toggledLaser != this.toggledLaser;
+  
+  if(this.toggledLaser)
+  {
+    this.setLaser(app.getHigh());
+  } else
+  {
+    this.setLaser(app.getLow());
+  }
+}
 
 var app = new RaspPi();
 
@@ -150,6 +177,8 @@ Mousetrap.bind('f', function() { app.setCH1(app.getLow()); });
 Mousetrap.bind('r', function() { app.setCH1(app.escMiddle, 0); }, 'keyup');
 Mousetrap.bind('f', function() { app.setCH1(app.escMiddle, 0); }, 'keyup');
 
+
+Mousetrap.bind('l', function() { app.toggleLaser(); });
 
 //check for events
 var haveEvents = 'GamepadEvent' in window;
