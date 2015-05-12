@@ -129,7 +129,7 @@ RaspPi.prototype.setLaser = function(value, controller) {
   }
 }
 
-RaspPi.prototype.toggleLaser() = function() {
+RaspPi.prototype.toggleLaser = function() {
   this.toggledLaser != this.toggledLaser;
   
   if(this.toggledLaser)
