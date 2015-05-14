@@ -18,9 +18,9 @@ function RaspPi() {
   this.throttlePower = 5;
   
   //ESC calibration data
-  this.escHigh = 1910;
-  this.escMiddle = 1479;
-  this.escLow = 1048;
+  this.escHigh = 2000;
+  this.escMiddle = 1500;
+  this.escLow = 1000;
   
   //Deadzone
   this.controllerDeadzone = .2;
@@ -129,15 +129,15 @@ RaspPi.prototype.setLaser = function(value, controller) {
   }
 }
 
-RaspPi.prototype.toggleLaser = function() {
-  this.toggledLaser != this.toggledLaser;
-  
+RaspPi.prototype.toggleLaser = function() {  
   if(this.toggledLaser)
   {
     this.setLaser(app.getHigh());
+    this.toggledLaser = false;
   } else
   {
     this.setLaser(app.getLow());
+    this.toggledLaser = true;
   }
 }
 
