@@ -7,12 +7,28 @@ function RaspPi() {
   
   this.toggledLaser = false;
   
+  this.toggledLight = false;
+  
   //Motor definition
-  this.CH1 = function(value) {this.socket.emit('CH0pwus', value);};
-  this.CH2 = function(value) {this.socket.emit('CH1pwus', value);};
-  this.CH3 = function(value) {this.socket.emit('CH2pwus', value);};
-  this.CH4 = function(value) {this.socket.emit('CH3pwus', value);};
-  this.Laser = function(value) {this.socket.emit('CH4pwus', value);};
+  this.CH0 = function CH0(value) {this.socket.emit('CH0pwus', value);};
+  this.CH1 = function CH1(value) {this.socket.emit('CH1pwus', value);};
+  this.CH2 = function CH2(value) {this.socket.emit('CH2pwus', value);};
+  this.CH3 = function CH3(value) {this.socket.emit('CH3pwus', value);};
+  this.CH4 = function CH4(value) {this.socket.emit('CH4pwus', value);};
+  this.Ch5 = function CH5(value) {this.socket.emit('CH5pwus', value);};
+  this.CH6 = function CH6(value) {this.socket.emit('CH6pwus', value);};
+  this.CH7 = function CH7(value) {this.socket.emit('CH7pwus', value);};
+  this.CH8 = function CH8(value) {this.socket.emit('CH8pwus', value);};
+  this.CH9 = function CH9(value) {this.socket.emit('CH9pwus', value);};
+  this.CH10 = function CH10(value) {this.socket.emit('CH10pwus', value);};
+  this.CH11 = function CH11(value) {this.socket.emit('CH11pwus', value);};
+	this.CH12 = function CH12(value) {this.socket.emit('CH12pwus', value);};
+	this.CH13 = function CH13(value) {this.socket.emit('CH13pwus', value);};
+  this.CH14 = function CH14(value) {this.socket.emit('CH14pwus', value);};
+  this.CH15 = function CH15(value) {this.socket.emit('CH15pwus', value);}; 
+  
+  // Helpful Shortcuts
+  this.Lasers = function(value) {this.CH4(value);};
   
   //Throttle Power
   this.throttlePower = 5;
@@ -42,91 +58,25 @@ RaspPi.prototype.calcController = function(value) {
   return float2int(this.escMiddle + (this.escHigh - this.escMiddle) / 5 * this.throttlePower * value)
 }
 
-RaspPi.prototype.setCH4 = function(value, controller) {
-  $("#mot1").html(value);
+RaspPi.prototype.setChannel= function(Channel, value, controller) {
   if(controller == undefined)
   {
-    this.CH4(value);
-    this.keyCH4 = true;
-    return;
+    Channel(value);
+    this.key[Channel.name] = true;
   } else if(controller == 0)
   {
-    this.keyCH4 = false;
-    this.CH4(value);
-  }else if(!this.keyCH4)
+    this.key[Channel.name]= false;
+    Channel(value);
+  }else if(!this.key[Channel.name])
   {
-    this.CH4(value);
+    Channel(value);
   }
 }
 
 
-RaspPi.prototype.setCH1 = function(value, controller) {
-  $("#mot2").html(value);
-  if(controller == undefined)
-  {
-    this.CH1(value);
-    this.keyCH1 = true;
-    return;
-  } else if(controller == 0)
-  {
-    this.keyCH1 = false;
-    this.CH1(value);
-  }else if(!this.keyCH1)
-  {
-    this.CH1(value);
-  }
-}
-
-
-RaspPi.prototype.setCH3 = function(value, controller) {
-  $("#mot3").html(value);
-  if(controller == undefined)
-  {
-    this.CH3(value);
-    this.keyCH3 = true;
-    return;
-  } else if(controller == 0)
-  {
-    this.keyCH3 = false;
-    this.CH3(value);
-  }else if(!this.keyCH3)
-  {
-    this.CH3(value);
-  }
-}
-
-
-RaspPi.prototype.setCH2 = function(value, controller) {
-  $("#mot4").html(value);
-  if(controller == undefined)
-  {
-    this.CH2(value);
-    this.keyCH2 = true;
-    return;
-  } else if(controller == 0)
-  {
-    this.keyCH2 = false;
-    this.CH2(value);
-  }else if(!this.keyCH2)
-  {
-    this.CH2(value);
-  }
-}
 
 RaspPi.prototype.setLaser = function(value, controller) {
-  if(controller == undefined)
-  {
-    this.Laser(value);
-    this.keyLaser = true;
-    return;
-  } else if(controller == 0)
-  {
-    this.keyLaser = false;
-    this.Laser(value);
-  }else if(!this.keyLaser)
-  {
-    this.Laser(value);
-  }
+  this.setChannel(this.Lasers, value, controller);
 }
 
 RaspPi.prototype.toggleLaser = function() {  
@@ -141,6 +91,24 @@ RaspPi.prototype.toggleLaser = function() {
   }
 }
 
+
+
+RaspPi.prototype.setLights = function(value, controller) {
+  this.setChannel(this.Lights, value, controller);
+}
+
+RaspPi.prototype.toggleLight = function() {  
+  if(this.toggledLight)
+  {
+    this.setLight(app.getHigh());
+    this.toggledLight = false;
+  } else
+  {
+    this.setLight(app.getLow());
+    this.toggledLight = true;
+  }
+}
+
 var app = new RaspPi();
 
 $("#throttle").html(app.throttlePower);
@@ -151,34 +119,36 @@ Mousetrap.bind('3', function() { app.throttlePower = 3; $("#throttle").html(app.
 Mousetrap.bind('4', function() { app.throttlePower = 4; $("#throttle").html(app.throttlePower); });
 Mousetrap.bind('5', function() { app.throttlePower = 5; $("#throttle").html(app.throttlePower); });
 
-Mousetrap.bind('w', function() { app.setCH4(app.getHigh()); });
-Mousetrap.bind('s', function() { app.setCH4(app.getLow()); });
-Mousetrap.bind('w', function() { app.setCH4(app.escMiddle, 0); }, 'keyup');
-Mousetrap.bind('s', function() { app.setCH4(app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('w', function() { app.setChannel(app.CH0, app.getHigh()); });
+Mousetrap.bind('s', function() { app.setChannel(app.CH0, app.getLow()); });
+Mousetrap.bind('w', function() { app.setChannel(app.CH0, app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('s', function() { app.setChannel(app.CH0, app.escMiddle, 0); }, 'keyup');
 
 
 
-Mousetrap.bind('q', function() { app.setCH2(app.getHigh()); });
-Mousetrap.bind('a', function() { app.setCH2(app.getLow()); });
-Mousetrap.bind('q', function() { app.setCH2(app.escMiddle, 0); }, 'keyup');
-Mousetrap.bind('a', function() { app.setCH2(app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('q', function() { app.setChannel(app.CH1, app.getHigh()); });
+Mousetrap.bind('a', function() { app.setChannel(app.CH1, app.getLow()); });
+Mousetrap.bind('q', function() { app.setChannel(app.CH1, app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('a', function() { app.setChannel(app.CH1, app.escMiddle, 0); }, 'keyup');
 
 
 
-Mousetrap.bind('e', function() { app.setCH3(app.getHigh()); });
-Mousetrap.bind('d', function() { app.setCH3(app.getLow()); });
-Mousetrap.bind('e', function() { app.setCH3(app.escMiddle, 0); }, 'keyup');
-Mousetrap.bind('d', function() { app.setCH3(app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('e', function() { app.setChannel(app.CH2, app.getHigh()); });
+Mousetrap.bind('d', function() { app.setChannel(app.CH2, app.getLow()); });
+Mousetrap.bind('e', function() { app.setChannel(app.CH2, app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('d', function() { app.setChannel(app.CH2, app.escMiddle, 0); }, 'keyup');
 
 
 
-Mousetrap.bind('r', function() { app.setCH1(app.getHigh()); });
-Mousetrap.bind('f', function() { app.setCH1(app.getLow()); });
-Mousetrap.bind('r', function() { app.setCH1(app.escMiddle, 0); }, 'keyup');
-Mousetrap.bind('f', function() { app.setCH1(app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('r', function() { app.setChannel(app.CH3, app.getHigh()); });
+Mousetrap.bind('f', function() { app.setChannel(app.CH3, app.getLow()); });
+Mousetrap.bind('r', function() { app.setChannel(app.CH3, app.escMiddle, 0); }, 'keyup');
+Mousetrap.bind('f', function() { app.setChannel(app.CH3, app.escMiddle, 0); }, 'keyup');
 
 
 Mousetrap.bind('l', function() { app.toggleLaser(); });
+
+Mousetrap.bind('k', function() { app.toggleLights(); });
 
 //check for events
 var haveEvents = 'GamepadEvent' in window;
@@ -295,10 +265,10 @@ function updateStatus() {
     a.setAttribute("value", controller.axes[i] + 1);
   }
   
-  app.setCH4(app.calcController(controller.axes[0]), true);
-  app.setCH1(app.calcController(controller.axes[1]), true);
-  app.setCH2(app.calcController(controller.axes[2]), true);
-  app.setCH3(app.calcController(controller.axes[3]), true);
+  app.setChannel(app.CH0, app.calcController(controller.axes[0]), true);
+  app.setChannel(app.CH2, app.calcController(controller.axes[1]), true);
+  app.setChannel(app.CH3, app.calcController(controller.axes[2]), true);
+  app.setChannel(app.CH4, app.calcController(controller.axes[3]), true);
   
   setTimeout(function(){rAF(updateStatus);},50);
 }
