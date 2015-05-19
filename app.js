@@ -152,6 +152,49 @@ io.on('connection', function(socket){
     servo(4, value);
   });
   
+  socket.on('CH5pwus', function(value) {
+    servo(5, value);
+  });
+  
+  socket.on('CH6pwus', function(value) {
+    servo(6, value);
+  });
+  
+  socket.on('CH7pwus', function(value) {
+    servo(7, value);
+  });
+  
+  socket.on('CH8pwus', function(value) {
+    servo(8, value);
+  });
+  
+  socket.on('CH9pwus', function(value) {
+    servo(9, value);
+  });
+  
+  socket.on('CH10pwus', function(value) {
+    servo(10, value);
+  });
+  
+  socket.on('CH11pwus', function(value) {
+    servo(11, value);
+  });
+  
+  socket.on('CH12pwus', function(value) {
+    servo(12, value);
+  });
+  
+  socket.on('CH13pwus', function(value) {
+    servo(13, value);
+  });
+  
+  socket.on('CH14pwus', function(value) {
+    servo(14, value);
+  });
+  
+  socket.on('CH15pwus', function(value) {
+    servo(15, value);
+  });
 });
 
 server.listen(8035, function() {
