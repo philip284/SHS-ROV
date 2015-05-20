@@ -12,22 +12,22 @@ function RaspPi() {
   this.toggledLight = false;
   
   //Motor definition
-  this.CH0 = function CH0(value) {this.socket.emit('CH0pwus', value);};
-  this.CH1 = function CH1(value) {this.socket.emit('CH1pwus', value);};
-  this.CH2 = function CH2(value) {this.socket.emit('CH2pwus', value);};
-  this.CH3 = function CH3(value) {this.socket.emit('CH3pwus', value);};
-  this.CH4 = function CH4(value) {this.socket.emit('CH4pwus', value);};
-  this.Ch5 = function CH5(value) {this.socket.emit('CH5pwus', value);};
-  this.CH6 = function CH6(value) {this.socket.emit('CH6pwus', value);};
-  this.CH7 = function CH7(value) {this.socket.emit('CH7pwus', value);};
-  this.CH8 = function CH8(value) {this.socket.emit('CH8pwus', value);};
-  this.CH9 = function CH9(value) {this.socket.emit('CH9pwus', value);};
-  this.CH10 = function CH10(value) {this.socket.emit('CH10pwus', value);};
-  this.CH11 = function CH11(value) {this.socket.emit('CH11pwus', value);};
-	this.CH12 = function CH12(value) {this.socket.emit('CH12pwus', value);};
-	this.CH13 = function CH13(value) {this.socket.emit('CH13pwus', value);};
-  this.CH14 = function CH14(value) {this.socket.emit('CH14pwus', value);};
-  this.CH15 = function CH15(value) {this.socket.emit('CH15pwus', value);}; 
+  this.CH0 = function CH0(value) {app.socket.emit('CH0pwus', value);};
+  this.CH1 = function CH1(value) {app.socket.emit('CH1pwus', value);};
+  this.CH2 = function CH2(value) {app.socket.emit('CH2pwus', value);};
+  this.CH3 = function CH3(value) {app.socket.emit('CH3pwus', value);};
+  this.CH4 = function CH4(value) {app.socket.emit('CH4pwus', value);};
+  this.Ch5 = function CH5(value) {app.socket.emit('CH5pwus', value);};
+  this.CH6 = function CH6(value) {app.socket.emit('CH6pwus', value);};
+  this.CH7 = function CH7(value) {app.socket.emit('CH7pwus', value);};
+  this.CH8 = function CH8(value) {app.socket.emit('CH8pwus', value);};
+  this.CH9 = function CH9(value) {app.socket.emit('CH9pwus', value);};
+  this.CH10 = function CH10(value) {app.socket.emit('CH10pwus', value);};
+  this.CH11 = function CH11(value) {app.socket.emit('CH11pwus', value);};
+	this.CH12 = function CH12(value) {app.socket.emit('CH12pwus', value);};
+	this.CH13 = function CH13(value) {app.socket.emit('CH13pwus', value);};
+  this.CH14 = function CH14(value) {app.socket.emit('CH14pwus', value);};
+  this.CH15 = function CH15(value) {app.socket.emit('CH15pwus', value);}; 
   
   // Helpful Shortcuts
   this.Lasers = function(value) {this.CH4(value);};
