@@ -5,6 +5,8 @@ function float2int(value) {
 function RaspPi() {
   this.socket = io();
   
+  this.key = {};
+  
   this.toggledLaser = false;
   
   this.toggledLight = false;
