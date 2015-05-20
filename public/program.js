@@ -17,7 +17,7 @@ function RaspPi() {
   this.CH2 = function CH2(value) {app.socket.emit('CH2pwus', value);};
   this.CH3 = function CH3(value) {app.socket.emit('CH3pwus', value);};
   this.CH4 = function CH4(value) {app.socket.emit('CH4pwus', value);};
-  this.Ch5 = function CH5(value) {app.socket.emit('CH5pwus', value);};
+  this.CH5 = function CH5(value) {app.socket.emit('CH5pwus', value);};
   this.CH6 = function CH6(value) {app.socket.emit('CH6pwus', value);};
   this.CH7 = function CH7(value) {app.socket.emit('CH7pwus', value);};
   this.CH8 = function CH8(value) {app.socket.emit('CH8pwus', value);};
