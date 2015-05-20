@@ -32,6 +32,8 @@ function RaspPi() {
   // Helpful Shortcuts
   this.Lasers = function(value) {this.CH4(value);};
   
+  this.Lights = function(value) {this.CH5(value);};
+  
   //Throttle Power
   this.throttlePower = 5;
   
