@@ -30,9 +30,9 @@ function RaspPi() {
   this.CH15 = function CH15(value) {app.socket.emit('CH15pwus', value);}; 
   
   // Helpful Shortcuts
-  this.Lasers = function(value) {this.CH4(value);};
+  this.Lasers = function(value) {app.CH4(value);};
   
-  this.Lights = function(value) {this.CH5(value);};
+  this.Lights = function(value) {app.CH5(value);};
   
   //Throttle Power
   this.throttlePower = 5;
@@ -152,7 +152,7 @@ Mousetrap.bind('f', function() { app.setChannel(app.CH3, app.escMiddle, 0); }, '
 
 Mousetrap.bind('l', function() { app.toggleLaser(); });
 
-Mousetrap.bind('k', function() { app.toggleLights(); });
+Mousetrap.bind('k', function() { app.toggleLight(); });
 
 //check for events
 var haveEvents = 'GamepadEvent' in window;
