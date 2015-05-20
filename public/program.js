@@ -97,7 +97,7 @@ RaspPi.prototype.toggleLaser = function() {
 
 
 
-RaspPi.prototype.setLights = function(value, controller) {
+RaspPi.prototype.setLight = function(value, controller) {
   this.setChannel(this.Lights, value, controller);
 }
 
