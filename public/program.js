@@ -154,6 +154,10 @@ Mousetrap.bind('l', function() { app.toggleLaser(); });
 
 Mousetrap.bind('k', function() { app.toggleLight(); });
 
+Mousetrap.bind('j', function() { app.toggleLight(); });
+
+Mousetrap.bind('h', function() { app.toggleLight(); });
+
 //check for events
 var haveEvents = 'GamepadEvent' in window;
 
