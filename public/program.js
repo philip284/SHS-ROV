@@ -11,6 +11,10 @@ function RaspPi() {
   
   this.toggledLight = false;
   
+  this.toggledLight2 = false;
+  
+  this.toggledLight3 = false;
+  
   //Motor definition
   this.CH0 = function CH0(value) {app.socket.emit('CH0pwus', value);};
   this.CH1 = function CH1(value) {app.socket.emit('CH1pwus', value);};
@@ -33,6 +37,11 @@ function RaspPi() {
   this.Lasers = function(value) {app.CH4(value);};
   
   this.Lights = function(value) {app.CH5(value);};
+  
+  this.Lights2 = function(value) {app.CH6(value);};
+  
+  this.Lights3 = function(value) {app.CH7(value);};
+  
   
   //Throttle Power
   this.throttlePower = 5;
@@ -113,6 +122,40 @@ RaspPi.prototype.toggleLight = function() {
   }
 }
 
+RaspPi.prototype.setLight3 = function(value, controller) {
+  this.setChannel(this.Lights3, value, controller);
+}
+
+RaspPi.prototype.toggleLight3 = function() {  
+  if(this.toggledLight3)
+  {
+    this.setLight3(app.getHigh());
+    this.toggledLight3 = false;
+  } else
+  {
+    this.setLight3(app.getLow());
+    this.toggledLight3 = true;
+  }
+}
+
+
+RaspPi.prototype.setLight2 = function(value, controller) {
+  this.setChannel(this.Lights2, value, controller);
+}
+
+RaspPi.prototype.toggleLight2 = function() {  
+  if(this.toggledLight2)
+  {
+    this.setLight2(app.getHigh());
+    this.toggledLight2 = false;
+  } else
+  {
+    this.setLight2(app.getLow());
+    this.toggledLight2 = true;
+  }
+}
+
+
 var app = new RaspPi();
 
 $("#throttle").html(app.throttlePower);
@@ -152,9 +195,9 @@ Mousetrap.bind('f', function() { app.setChannel(app.CH3, app.escMiddle, 0); }, '
 
 Mousetrap.bind('l', function() { app.toggleLaser(); });
 
-Mousetrap.bind('k', function() { app.toggleLight(); });
+Mousetrap.bind('k', function() { app.toggleLight3(); });
 
-Mousetrap.bind('j', function() { app.toggleLight(); });
+Mousetrap.bind('j', function() { app.toggleLight2(); });
 
 Mousetrap.bind('h', function() { app.toggleLight(); });
 
